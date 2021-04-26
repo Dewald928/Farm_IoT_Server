@@ -29,7 +29,7 @@ router.post("/", upload.single("tunnelImg"), (req, res, next) => {
   const tunnel = {
     tunnelNum: req.body.tunnelNum,
     datetime: req.body.datetime,
-    tunnelImg: req.file.path
+    // tunnelImg: req.file
   };
   res.status(200).json({
     message: "Handling POST request to /tunnel",

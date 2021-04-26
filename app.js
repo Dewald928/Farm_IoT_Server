@@ -7,7 +7,7 @@ const serveIndex = require('serve-index');
 const tunnelRoutes = require("./api/routes/tunnel");
 
 app.use(morgan("dev"));
-app.use('/uploads', express.static('uploads'),serveIndex('uploads', {'icons': true}));
+app.use('/uploads', express.static('uploads'),serveIndex('uploads', {'icons': true})); // allow browsing at /uploads
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 
