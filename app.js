@@ -2,10 +2,12 @@ const express = require("express");
 const app = express();
 const morgan = require("morgan");
 const bodyParser = require('body-parser');
+const serveIndex = require('serve-index');
 
 const tunnelRoutes = require("./api/routes/tunnel");
 
 app.use(morgan("dev"));
+app.use('/uploads', express.static('uploads'),serveIndex('uploads', {'icons': true}));
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 
