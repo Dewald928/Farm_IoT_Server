@@ -1,27 +1,37 @@
 const express = require("express");
 const app = express();
 const morgan = require("morgan");
-const bodyParser = require('body-parser');
-const serveIndex = require('serve-index');
+const bodyParser = require("body-parser");
+const serveIndex = require("serve-index");
 
 const tunnelRoutes = require("./api/routes/tunnel");
 
 app.use(morgan("dev"));
-app.use('/uploads', express.static('uploads'),serveIndex('uploads', {'icons': true})); // allow browsing at /uploads
-app.use(express.urlencoded({extended: false}));
+app.use(
+  "/uploads",
+  express.static("uploads"),
+  serveIndex("uploads", { icons: true })
+); // allow browsing at /uploads
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 // CORS handling
-app.use((req,res,next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', '*');
-    if (req.method === 'OPTIONS') {
-        res.header('Acess-Control.Allow.Methods', 'PUT', 'POST', 'PATCH', 'DELETE', 'GET');
-        return res.status(200).json({})
-    }
-    next();
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "*");
+  if (req.method === "OPTIONS") {
+    res.header(
+      "Acess-Control.Allow.Methods",
+      "PUT",
+      "POST",
+      "PATCH",
+      "DELETE",
+      "GET"
+    );
+    return res.status(200).json({});
+  }
+  next();
 });
-
 
 app.use("/tunnel", tunnelRoutes);
 
