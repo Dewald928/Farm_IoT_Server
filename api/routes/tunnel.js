@@ -49,10 +49,21 @@ router.get("/:number/:datetime", (req, res, next) => {
   const num = req.params.number;
   const datetime = req.params.datetime;
 
-  res.status(200).json({
-    message:
-      "Handling GET request to /tunnel/" + num + " with datetime " + datetime,
-  });
+  const date_now = new Date().valueOf();
+  let reqPath = path.join(__dirname, "../../");
+
+  if (datetime === "latest") {
+    filenames = fs.readdirSync(reqPath + "/uploads/T" + num + "/");
+    filename = filenames[filenames.length - 1];
+    console.log(filename);
+
+    res.sendFile(reqPath +"./uploads/T" + num + "/" + filename)
+
+    // res.status(200).json({
+    //   filename: filenames[filenames.length - 1],
+    //   imageURL: "./uploads/" + filenames[filenames.length - 1]
+    // });
+  }
 });
 
 module.exports = router;
