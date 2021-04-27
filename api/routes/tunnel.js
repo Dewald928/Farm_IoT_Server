@@ -54,7 +54,7 @@ router.get("/:number/:datetime", (req, res, next) => {
 
   if (datetime === "latest") {
     filenames = fs.readdirSync(reqPath + "/uploads/T" + num + "/");
-    filename = filenames[filenames.length - 1];
+    filename = filenames[filenames.length - 1]; //TODO check by time that it is infact the latest
     console.log(filename);
 
     res.sendFile(reqPath +"./uploads/T" + num + "/" + filename)

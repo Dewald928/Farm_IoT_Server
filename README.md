@@ -1,5 +1,5 @@
 ## Installation
 
 ```
-npm start
+npm run start
 ```
