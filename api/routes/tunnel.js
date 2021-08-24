@@ -3,6 +3,7 @@ const router = express.Router();
 const multer = require("multer");
 const path = require("path");
 var fs = require("fs");
+const findRemoveSync = require('find-remove')
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -36,6 +37,9 @@ router.post("/", upload.single("tunnelImg"), (req, res, next) => {
     tunnel: tunnel,
   });
   console.log(tunnel);
+  // Delete images older than 1 week
+  let result = findRemoveSync("./uploads", {age: {seconds: 7*24*60*60}, extensions: '.jpg'})
+  console.log(result);
 });
 
 router.get("/:number", (req, res, next) => {
